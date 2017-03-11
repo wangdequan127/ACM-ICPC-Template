@@ -1,0 +1,55 @@
+类属性算法unique的作用是从输入序列中“删除”所有相邻的重复元素。
+该算法删除相邻的重复元素，然后重新排列输入范围内的元素，并且返回一个迭代器（容器的长度没变，只是元素顺序改变了），表示无重复的值范围得结束。
+在STL中unique函数是一个去重函数， unique的功能是去除相邻的重复元素(只保留一个),其实它并不真正把重复的元素删除，是把重复的元素移到后面去了，然后依然保存到了原数组中，然后 返回去重后最后一个元素的地址，因为unique去除的是相邻的重复元素，所以一般用之前都会要排一下序。
+#include <iostream>
+#include <cassert>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <iterator>
+ using namespace std;
+ int main()
+{
+    //cout<<"Illustrating the generic unique algorithm."<<endl;
+    const int N=11;
+    int array1[N]={1,2,0,3,3,0,7,7,7,0,8};
+    vector<int> vector1;
+    for (int i=0;i<N;++i)
+        vector1.push_back(array1[i]);
+    vector<int>::iterator new_end;
+    new_end=unique(vector1.begin(),vector1.end());    //"删除"相邻的重复元素
+    assert(vector1.size()==N);
+    vector1.erase(new_end,vector1.end());  //删除（真正的删除）重复的元素
+    copy(vector1.begin(),vector1.end(),ostream_iterator<int>(cout," "));
+    cout<<endl;
+    return 0;
+}
+unique_copy
+
+算法标准库定义了一个名为unique_copy的函数，其操作类似于unique。
+唯一的区别在于：前者接受第三个迭代器实参，用于指定复制不重复元素的目标序列。
+unique_copy根据字面意思就是去除重复元素再执行copy运算。
+//使用unique_copy算法
+//将一个list对象中不重复的元素赋值到一个空的vector对象中
+#include<iostream>
+#include<list>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int main()
+{
+    int ia[7] = {5 , 2 , 2 , 2 , 100 , 5 , 2};
+    list<int> ilst(ia , ia + 7);
+    vector<int> ivec;
+    //将list对象ilst中不重复的元素复制到空的vector对象ivec中
+    //sort(ilst.begin() , ilst.end());  //不能用此种排序，会报错
+    ilst.sort();  //在进行复制之前要先排序，切记
+    unique_copy(ilst.begin() , ilst.end() , back_inserter(ivec));
+    //输出vector容器
+    cout<<"vector: "<<endl;
+    for(vector<int>::iterator iter = ivec.begin() ; iter != ivec.end() ; ++iter)
+        cout<<*iter<<" ";
+    cout<<endl;
+    return 0;
+}
+

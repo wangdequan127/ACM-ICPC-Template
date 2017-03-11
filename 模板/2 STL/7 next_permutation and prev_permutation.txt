@@ -1,0 +1,41 @@
+next_permutation
+（1）如果给你组数：1 2 3 4 5
+（2）如果给出的条件是让你从小到大求出下一个排列，当然就是：1 2 3 5 4
+（3）如果再下一个就是：1 2 4 3 5   ；再下一个是：1 2 4 5 3
+（4）如果问你求的是下n个排列是什么？你该怎么快速求出呢？？？
+当然，在（2）中的答案可以从（1）中的倒数第一位与第二位比较，如果倒数第一位比第二位大，那么交换位置，然后下一个排列就是交换后的了，即：1 2 3 5 4；
+然后依次下去用这种思想可以求出下面的排列……
+ 
+但是你想想每位都要比较判断，如果相等又往前推，依次这样的话，判断语句又多，代码也不会短，你不烦我还烦呢……  ^_^  嘿嘿，想偷懒就得想个法子解决问题……
+ 
+所以懒也是有原因的……next_permutation出场的时候就到了……
+使用方法： next_permutation(数组头地址，数组尾地址); 若下一个排列存在，则返回真，如果不存在则返回假。
+举例：（1）数据数组
+Int a[6]={1,2,3,5,4};
+If(next_permutation(a,a+5))
+{
+for(int i=0;i<5;i++)
+cout<<a[i]<<‘ ‘;
+}  
+输出：1 2 4 5 3;也就是1 2 3 5 4的下一个排列咯，是不是很快……
+（2）字符串（字母数组）
+String str=“abcde”;  //输出下5个排列
+Int k=0;
+While(next_permutation(str.begin(),str.end())) //begin()与end()是string类的迭代器  
+{
+k++;
+cout<<str<<endl;
+if(k==5) break;
+}
+输出：
+abced
+abdce
+abdec
+abecd
+Abedc
+ 
+问题又来了，既然next_permutation可以求下一个排列，那有没有函数可以求上一个排列的？当然有啦！就是prev_permutation。用法与next_permutation是一样的。
+例：
+String str=“abecd”;
+if(prev_permutation(str.begin(),str.end())) cout<<str<<endl;
+输出：abdec; //看上面例子

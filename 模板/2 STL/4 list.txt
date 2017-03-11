@@ -1,0 +1,48 @@
+#include<iostream>
+#include<cstdio>
+#include<queue>
+#include<cstring>
+#include<string>
+#include<list>
+#include<cmath>
+#include<algorithm>
+#include<assert.h>
+#include<stdlib.h>
+#include<time.h>
+#include<set>
+#include<stack>
+#include<vector>
+#include<map>
+#define pi acos(-1.0)
+#define inf 1<<20
+#define debug puts("**********")
+#define mx 200005
+typedef long long ll;
+using namespace std;
+int main()
+{
+    char c;
+    while(~scanf("%c",&c))
+    {
+        list<char>s;
+        list<char>::iterator it=s.begin();
+        if(!(c=='['||c==']'))
+        {
+            s.insert(it++,c);
+        }
+        while(~scanf("%c",&c))
+        {
+            if(c=='\n')break;
+            if(c=='[')
+                it=s.begin();
+            else
+                if(c==']')
+                it=s.end();
+            else
+                s.insert(it,c);
+        }
+        for(list<char>::iterator i=s.begin(); i!=s.end(); i++)
+            cout<<*i;
+        cout<<endl;
+    }
+}
